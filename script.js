@@ -6,21 +6,26 @@ getData()
 
 filter.addEventListener('input', (e) => filterData(e.target.value))
 
-function getData() {
-    const res = 
+async function getData() { //se agrega async
+    const res = await fetch('https://randomuser.me/api?results=50') //se agega await y link
 
-    const {  } = json()
+    const {results} = await res.json() //se agrega results y await res.json()
 
     // Clear result
     result.innerHTML = ''
 
-    (user => {
+    results.forEach(user => { //se agreg results.forEach
         const li = document.createElement('li')
 
         listItems.push(li)
 
-        li.innerHTML = `
- 
+        //aqui
+        li.innerHTML = ` 
+            <img src="${user.picture.large}" alt="${user.name.first}">
+            <div class="user-info">
+                <h4>${user.name.first} ${user.name.last}</h4>
+                <p>${user.location.city}, ${user.location.country}</p>
+            </div>
         `
 
         result.appendChild(li)
